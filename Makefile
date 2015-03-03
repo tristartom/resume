@@ -1,16 +1,16 @@
-all: index.html index.pdf index.docx index.txt
+all: html pdf docx txt
 
-index.html: index.md style.css
-	pandoc --standalone -c style.css --from markdown --to html -o index.html index.md
+html: tang-cv.md style.css
+	pandoc --standalone -c style.css --from markdown --to html -o tang-cv.html tang-cv.md
 
-index.pdf: index.html
-	wkhtmltopdf index.html index.pdf
+pdf: html
+	wkhtmltopdf tang-cv.html tang-cv.pdf
 
-index.docx: index.md
-	pandoc --from markdown --to docx -o index.docx index.md
+docx: tang-cv.md
+	pandoc --from markdown --to docx -o tang-cv.docx tang-cv.md
 
-index.txt: index.md
-	pandoc --standalone --smart --from markdown --to plain -o index.txt index.md
+txt: tang-cv.md
+	pandoc --standalone --smart --from markdown --to plain -o tang-cv.txt tang-cv.md
 
 clean:
 	rm -f *.html *.pdf *.docx *.txt
